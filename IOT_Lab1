@@ -5,7 +5,7 @@ import time
 GPIO.setmode(GPIO.BCM)
 
 # Define the GPIO pins for each LED
-led_pins = [2, 3, 4, 14, 15, 18]
+led_pins = [2, 3, 4]
 
 # Initialize GPIO pins as outputs
 for pin in led_pins:
@@ -17,11 +17,13 @@ try:
         current_time = time.localtime()
         seconds = current_time.tm_sec
 
+        countup = seconds % 8
+
         # convert seconds to binary string
-        binary_seconds = format(seconds, '06b')
+        binary_seconds = format(seconds, '03b')
 
         # display each binary digit by turning LEDs on or off
-        for i in range(6):
+        for i in range(3):
             GPIO.output(led_pins[i], int(binary_seconds[i]))
 
         # wait one second before resuming the program
